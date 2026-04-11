@@ -623,11 +623,15 @@ function attachEvents(){
     // ============================================================
     if(a&&a.email){
       try{
-        emailjs.init('1BXDYsn3l8dYS5u7Q');
-        await emailjs.send('service_ugnx7wk','template_2yce8gc',{
-          tool_name:a.name,author_name:a.author,author_email:a.email
+        await fetch('https://catalog-hamagber.gallevy72.workers.dev/send-email',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            templateId:'template_2yce8gc',
+            params:{tool_name:a.name,author_name:a.author,name:a.author,author_email:a.email}
+          })
         });
-      }catch(err){console.error('Email error:',err)}
+      }catch(err){console.error('Approval email error:',err)}
     }
     // ============================================================
     render();showToast('✅ אושר!')
