@@ -532,23 +532,26 @@ window.submitForm=async function(){
       role:document.getElementById('f-role')?.value.trim()||'',
       submittedAt:new Date().toISOString()
     });
-    // ============================================================
-    // ⚙️  REPLACE WITH YOUR EMAILJS CONFIG
-    // ============================================================
+    // שליחת מייל דרך Worker
     try{
-      emailjs.init('1BXDYsn3l8dYS5u7Q');
-      await emailjs.send('service_ugnx7wk','template_k42r09a',{
-        tool_name:name,
-        author_name:author,
-        name:author,
-        author_email:email,
-        tool_url:url,
-        tool_purpose:purpose,
-        tool_usage:usage,
-        tool_community:community
+      await fetch(WORKER_URL+'/send-email',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          templateId:'template_k42r09a',
+          params:{
+            tool_name:name,
+            author_name:author,
+            name:author,
+            author_email:email,
+            tool_url:url,
+            tool_purpose:purpose,
+            tool_usage:usage,
+            tool_community:community
+          }
+        })
       });
     }catch(emailErr){console.error('Email error:',emailErr)}
-    // ============================================================
     document.getElementById('formCard').style.display='none';
     document.getElementById('successState').classList.add('show');
     showToast('🎉 הכלי נשלח בהצלחה!');
