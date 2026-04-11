@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קטלוג המגבר — הגשת כלי חדש</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0038FF;
+  --blue-light:#E6EEFF;
+  --blue-mid:#B3C6FF;
+  --blue-dark:#002299;
+  --yellow:#FFD600;
+  --purple:#5533CC;
+  --purple-light:#C5B3FF;
+  --purple-bg:#F3F0FF;
+  --bg:#F7F8FC;
+  --text-primary:#1A1A2E;
+  --text-secondary:#525F7F;
+  --text-light:#8898AA;
+  --border:#EBEBEB;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6}
+
+/* HEADER */
+.header{background:#fff;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,0.06)}
+.header-inner{max-width:800px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.logo-text{font-family:'Rubik',sans-serif;font-weight:700;font-size:16px;color:var(--text-primary)}
+.logo-text span{color:var(--blue)}
+.logo-sub{font-size:11px;color:var(--text-light)}
+.back-link{font-size:13px;color:var(--text-light);text-decoration:none;transition:color .2s}
+.back-link:hover{color:var(--blue)}
+
+/* PAGE */
+.page-container{max-width:700px;margin:0 auto;padding:36px 24px 60px}
+.page-hero{text-align:center;margin-bottom:28px}
+.page-hero .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;background:var(--blue-light);border:0.5px solid var(--blue-mid);font-size:12px;color:var(--blue);font-weight:600;margin-bottom:12px}
+.page-hero h1{font-family:'Rubik',sans-serif;font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:8px}
+.page-hero h1 span{color:var(--blue)}
+.page-hero p{font-size:14px;color:var(--text-secondary);max-width:480px;margin:0 auto;line-height:1.7}
+
+/* FORM CARD */
+.form-card{background:#fff;border-radius:var(--radius);border:0.5px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+.form-section{padding:24px 28px;border-bottom:0.5px solid var(--border)}
+.form-section:last-of-type{border-bottom:none}
+.form-section-title{font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--text-primary)}
+.form-section-title .num{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'Rubik',sans-serif;flex-shrink:0}
+.ai-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:4px;background:var(--blue-light);font-size:11px;color:var(--blue);font-weight:600}
+
+/* FORM ELEMENTS */
+.form-group{margin-bottom:16px}
+.form-group:last-child{margin-bottom:0}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:5px}
+.form-group .hint{font-size:11px;color:var(--text-light);font-weight:400;margin-right:4px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 13px;border-radius:var(--radius-sm);border:1px solid var(--border);font-family:'Heebo',sans-serif;font-size:14px;color:var(--text-primary);background:var(--bg);transition:all .2s;direction:rtl}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(0,56,255,0.07)}
+.form-group textarea{min-height:80px;resize:vertical;line-height:1.7}
+.form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238898AA' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 13px center;padding-left:32px;cursor:pointer}
+.form-group input[dir="ltr"]{text-align:left;direction:ltr}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* URL SCAN */
+.url-scan-row{display:flex;gap:10px;align-items:flex-start}
+.url-scan-row input{flex:1}
+.btn-scan{padding:10px 18px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.btn-scan:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-scan:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.scan-status{margin-top:10px;padding:12px;border-radius:var(--radius-sm);font-size:13px;line-height:1.6;display:none}
+.scan-status.scanning{display:block;background:var(--blue-light);border:0.5px solid var(--blue-mid);color:var(--blue-dark)}
+.scan-status.success{display:block;background:#F0FDF4;border:0.5px solid #86EFAC;color:#166534}
+.scan-status.error{display:block;background:#FEF2F2;border:0.5px solid #FCA5A5;color:#DC2626}
+
+/* EMOJI PICKER */
+.emoji-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.emoji-option{width:42px;height:42px;border-radius:10px;border:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all .2s}
+.emoji-option:hover{border-color:var(--blue-mid);transform:scale(1.1)}
+.emoji-option.selected{border-color:var(--blue);background:var(--blue-light);box-shadow:0 0 0 2px rgba(0,56,255,0.15);transform:scale(1.1)}
+
+/* TAGS */
+.tags-input{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag-option{padding:5px 13px;border-radius:100px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all .2s}
+.tag-option:hover{border-color:var(--blue-mid);color:var(--blue)}
+.tag-option.selected{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+
+/* IMAGE UPLOAD */
+.image-upload-area{border:1.5px dashed var(--border);border-radius:var(--radius-sm);padding:4px;transition:border-color .2s;min-height:110px;display:flex;align-items:center;justify-content:center}
+.image-upload-area:hover{border-color:var(--blue-mid)}
+.image-placeholder{text-align:center;padding:20px 16px}
+.image-placeholder-icon{font-size:28px;margin-bottom:6px;opacity:0.4}
+.image-placeholder-text{font-size:12px;color:var(--text-light);margin-bottom:10px}
+.btn-upload{padding:7px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all .2s}
+.btn-upload:hover{border-color:var(--blue-mid);color:var(--blue)}
+.image-preview{position:relative;width:100%;max-height:220px;overflow:hidden;border-radius:var(--radius-sm)}
+.image-preview img{width:100%;height:auto;max-height:220px;object-fit:cover;border-radius:var(--radius-sm);display:block}
+.image-remove{position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;border:none;background:rgba(0,0,0,0.55);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.image-remove:hover{background:rgba(220,38,38,0.85)}
+
+/* PREVIEW CARD */
+.preview-card{margin:0 28px 24px;padding:16px;background:var(--bg);border-radius:var(--radius-sm);border:0.5px solid var(--border);display:none}
+.preview-label{font-size:11px;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.preview-inner{background:#fff;border-radius:var(--radius-sm);border:0.5px solid var(--border);padding:14px;display:flex;align-items:flex-start;gap:12px}
+.preview-icon{width:40px;height:40px;border-radius:9px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.preview-name{font-family:'Rubik',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary)}
+.preview-author{font-size:11px;color:var(--text-light);margin-bottom:4px}
+.preview-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
+
+/* SUBMIT */
+.submit-section{padding:20px 28px 28px}
+.btn-submit{width:100%;padding:13px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+/* SUCCESS */
+.success-state{text-align:center;padding:52px 24px;display:none}
+.success-state.show{display:block}
+.success-icon{width:72px;height:72px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 18px;border:1px solid var(--blue-mid)}
+.success-state h2{font-family:'Rubik',sans-serif;font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:10px}
+.success-state p{color:var(--text-secondary);font-size:14px;line-height:1.7;max-width:380px;margin:0 auto 22px}
+.btn-another{padding:10px 24px;border-radius:100px;border:1px solid var(--border);background:#fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer}
+.btn-another:hover{border-color:var(--blue-mid);color:var(--blue)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-primary);color:#fff;padding:12px 24px;border-radius:100px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.15);z-index:300;transition:transform .3s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .header-inner{padding:10px 16px}
+  .page-container{padding:20px 14px 40px}
+  .form-section{padding:18px 16px}
+  .submit-section{padding:16px}
+  .preview-card{margin:0 16px 16px}
+  .url-scan-row{flex-direction:column}
+  .btn-scan{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">קטלוג <span>המגבר</span></div>
+        <div class="logo-sub">הגשת כלי חדש</div>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">→ חזרה לקטלוג</a>
+  </div>
+</header>
+
+<div class="page-container">
+  <div class="page-hero">
+    <div class="badge">📬 טופס הגשה</div>
+    <h1>הגשת כלי חינוכי <span>חדש</span></h1>
+    <p>הדביקו קישור — הבינה המלאכותית תקרא את הכלי ותמלא את הפרטים עבורכם. תוכלו לערוך לפני השליחה.</p>
+  </div>
+
+  <div class="form-card" id="formCard">
+
+    <!-- 1: URL -->
+    <div class="form-section">
+      <div class="form-section-title"><span class="num">1</span> קישור לכלי</div>
+      <div class="form-group">
+        <label>הדביקו קישור ולחצו "סרוק"</label>
+        <div class="url-scan-row">
+          <input type="url" id="f-url" placeholder="https://..." dir="ltr">
+          <button class="btn-scan" id="scanBtn" onclick="scanUrl()">🔍 סרוק</button>
+        </div>
+        <div class="scan-status" id="scanStatus"></div>
+      </div>
+    </div>
+
+    <!-- 2: About you -->
+    <div class="form-section">
+      <div class="form-section-title"><span class="num">2</span> פרטים שלך</div>
+      <div class="form-row">
+        <div class="form-group"><label>שם מלא</label><input type="text" id="f-author" placeholder="השם שלך"></div>
+        <div class="form-group"><label>מייל <span class="hint">(לא יפורסם)</span></label><input type="email" id="f-email" placeholder="your@email.com" dir="ltr"></div>
+      </div>
+      <div class="form-group"><label>תפקיד <span class="hint">(לא חובה)</span></label><input type="text" id="f-role" placeholder='למשל: מורה למתמטיקה, בית ספר "רימון"'></div>
+    </div>
+
+    <!-- 3: Tool details -->
+    <div class="form-section">
+      <div class="form-section-title"><span class="num">3</span> פרטי הכלי <span class="ai-badge">🤖 ממולא אוטומטית</span></div>
+      <div class="form-row">
+        <div class="form-group"><label>שם הכלי</label><input type="text" id="f-name" placeholder="למשל: חדר בריחה — יציאת מצרים" oninput="updatePreview()"></div>
+        <div class="form-group"><label>סוג הכלי</label>
+          <select id="f-type" onchange="updatePreview()">
+            <option value="">בחר/י...</option>
+            <option value="בוט">בוט</option>
+            <option value="אפליקציה">אפליקציה</option>
+            <option value="סוכן">סוכן</option>
+            <option value="לומדה">לומדה</option>
+            <option value="משחק">משחק</option>
+            <option value="חדר בריחה">חדר בריחה</option>
+            <option value="אתר">אתר</option>
+            <option value="כלי AI">כלי AI</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>מהי מטרת הכלי? <span class="hint">(משפט-שניים)</span></label><textarea id="f-purpose" placeholder="למשל: עוזר לתלמידים לתרגל אוצר מילים באנגלית בצורה אינטראקטיבית" oninput="updatePreview()"></textarea></div>
+      <div class="form-group"><label>איך משתמשים בו? <span class="hint">(משפט-שניים)</span></label><textarea id="f-usage" placeholder="למשל: התלמיד נכנס לקישור, בוחר נושא, ועונה על חידון"></textarea></div>
+      <div class="form-group"><label>בחר/י אייקון</label>
+        <div class="emoji-picker" id="emojiPicker">
+          <div class="emoji-option" data-emoji="🤖">🤖</div>
+          <div class="emoji-option" data-emoji="🏛️">🏛️</div>
+          <div class="emoji-option" data-emoji="📚">📚</div>
+          <div class="emoji-option" data-emoji="✍️">✍️</div>
+          <div class="emoji-option" data-emoji="🧮">🧮</div>
+          <div class="emoji-option" data-emoji="🎯">🎯</div>
+          <div class="emoji-option" data-emoji="🎮">🎮</div>
+          <div class="emoji-option" data-emoji="🧩">🧩</div>
+          <div class="emoji-option" data-emoji="🔬">🔬</div>
+          <div class="emoji-option" data-emoji="🌍">🌍</div>
+          <div class="emoji-option" data-emoji="🎨">🎨</div>
+          <div class="emoji-option" data-emoji="💬">💬</div>
+          <div class="emoji-option" data-emoji="📝">📝</div>
+          <div class="emoji-option" data-emoji="🕵️">🕵️</div>
+          <div class="emoji-option" data-emoji="⚡">⚡</div>
+          <div class="emoji-option" data-emoji="🌱">🌱</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>תמונה של הכלי <span class="hint">(ממולא אוטומטית, או העלו בעצמכם)</span></label>
+        <div class="image-upload-area" id="imageArea">
+          <div class="image-preview" id="imagePreview" style="display:none">
+            <img id="imagePreviewImg" src="" alt="תצוגה מקדימה">
+            <button type="button" class="image-remove" onclick="removeImage()">✕</button>
+          </div>
+          <div class="image-placeholder" id="imagePlaceholder">
+            <div class="image-placeholder-icon">📷</div>
+            <div class="image-placeholder-text">גרור תמונה לכאן או לחץ לבחירה</div>
+            <input type="file" id="f-image-upload" accept="image/*" style="display:none">
+            <button type="button" class="btn-upload" onclick="document.getElementById('f-image-upload').click()">📁 בחר תמונה</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: Classification -->
+    <div class="form-section">
+      <div class="form-section-title"><span class="num">4</span> סיווג <span class="ai-badge">🤖 ממולא אוטומטית</span></div>
+      <div class="form-row">
+        <div class="form-group"><label>גיל יעד</label>
+          <select id="f-age">
+            <option value="">בחר/י...</option>
+            <option value="גן">גן</option>
+            <option value="יסודי">יסודי</option>
+            <option value="יסודי-חט״ב">יסודי-חט״ב</option>
+            <option value="חט״ב">חט״ב</option>
+            <option value="חט״ב-תיכון">חט״ב-תיכון</option>
+            <option value="תיכון">תיכון</option>
+            <option value="כל הגילאים">כל הגילאים</option>
+          </select>
+        </div>
+        <div class="form-group"><label>תחום דעת</label>
+          <select id="f-subject">
+            <option value="">בחר/י...</option>
+            <option value="מתמטיקה">מתמטיקה</option>
+            <option value="עברית">עברית</option>
+            <option value="אנגלית">אנגלית</option>
+            <option value="תנ״ך">תנ״ך</option>
+            <option value="מדעים">מדעים</option>
+            <option value="היסטוריה">היסטוריה</option>
+            <option value="מדעי המחשב">מדעי המחשב</option>
+            <option value="חינוך חברתי">חינוך חברתי</option>
+            <option value="אומנות">אומנות</option>
+            <option value="בין-תחומי">בין-תחומי</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
+      </div>
+      <!-- קהילה — שדה חדש -->
+      <div class="form-group">
+        <label>קהילה במגבר</label>
+        <select id="f-community">
+          <option value="">בחר/י קהילה...</option>
+          <option value="בינה מלאכותית">בינה מלאכותית</option>
+          <option value="נוירופדגוגיה">נוירופדגוגיה</option>
+          <option value="שלומות המורים">שלומות המורים</option>
+          <option value="בית מדרש עברי">בית מדרש עברי</option>
+          <option value="פסיכופדגוגיה">פסיכופדגוגיה</option>
+          <option value="מחנה משותף">מחנה משותף</option>
+        </select>
+      </div>
+      <div class="form-group"><label>תגיות <span class="hint">(עד 4)</span></label>
+        <div class="tags-input" id="tagsInput">
+          <div class="tag-option" data-tag="חדר בריחה">חדר בריחה</div>
+          <div class="tag-option" data-tag="בוט AI">בוט AI</div>
+          <div class="tag-option" data-tag="משחק">משחק</div>
+          <div class="tag-option" data-tag="תרגול">תרגול</div>
+          <div class="tag-option" data-tag="אינטראקטיבי">אינטראקטיבי</div>
+          <div class="tag-option" data-tag="מלווה למידה">מלווה למידה</div>
+          <div class="tag-option" data-tag="הערכה">הערכה</div>
+          <div class="tag-option" data-tag="כתיבה">כתיבה</div>
+          <div class="tag-option" data-tag="חברתי-רגשי">חברתי-רגשי</div>
+          <div class="tag-option" data-tag="פאזל">פאזל</div>
+          <div class="tag-option" data-tag="סימולציה">סימולציה</div>
+          <div class="tag-option" data-tag="ניהול כיתה">ניהול כיתה</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-card" id="previewCard">
+      <div class="preview-label">👁️ תצוגה מקדימה</div>
+      <div class="preview-inner">
+        <div class="preview-icon" id="previewIcon">🤖</div>
+        <div>
+          <div class="preview-name" id="previewName">שם הכלי</div>
+          <div class="preview-author" id="previewAuthor">שם היוצר</div>
+          <div class="preview-desc" id="previewDesc">תיאור הכלי יופיע כאן...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <button class="btn-submit" id="submitBtn" onclick="submitForm()">📬 שליחת הכלי לבדיקה</button>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="form-card success-state" id="successState">
+    <div class="success-icon">🎉</div>
+    <h2>הכלי שלך נשלח בהצלחה!</h2>
+    <p>הכלי נשלח למנהלי הקטלוג וממתין לאישור. נעדכן אותך במייל כשיעלה לקטלוג.</p>
+    <button class="btn-another" onclick="resetForm()">📬 הגשת כלי נוסף</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import{getFirestore,collection,addDoc}from"https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+// ============================================================
+// ⚙️  REPLACE WITH YOUR FIREBASE CONFIG
+// ============================================================
+const firebaseConfig={
+  apiKey:"AIzaSyAVELCjC68Wp_Mk5g5otDVZTpNGr39KfDE",
+  authDomain:"catalog-hamagber.firebaseapp.com",
+  projectId:"catalog-hamagber",
+  storageBucket:"catalog-hamagber.firebasestorage.app",
+  messagingSenderId:"44129692264",
+  appId:"1:44129692264:web:fe690ddd33f5e8c63629dd"
+};
+// ============================================================
+
+// ============================================================
+// ⚙️  REPLACE WITH YOUR CLOUDFLARE WORKER URL
+// ============================================================
+const WORKER_URL="https://catalog-hamagber.gallevy72.workers.dev";
+// ============================================================
+
+const fbApp=initializeApp(firebaseConfig);
+const db=getFirestore(fbApp);
+
+let selectedEmoji='';
+let selectedTags=[];
+let imageUrl='';
+
+// File upload
+document.getElementById('f-image-upload')?.addEventListener('change',function(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{imageUrl=ev.target.result;showImagePreview(imageUrl)};
+  reader.readAsDataURL(file);
+});
+
+function showImagePreview(src){
+  document.getElementById('imagePreviewImg').src=src;
+  document.getElementById('imagePreview').style.display='block';
+  document.getElementById('imagePlaceholder').style.display='none';
+}
+
+window.removeImage=function(){
+  imageUrl='';
+  document.getElementById('imagePreview').style.display='none';
+  document.getElementById('imagePlaceholder').style.display='block';
+  document.getElementById('f-image-upload').value='';
+}
+
+// Emoji
+document.querySelectorAll('.emoji-option').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.emoji-option').forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedEmoji=el.dataset.emoji;
+    updatePreview();
+  });
+});
+
+// Tags
+document.querySelectorAll('.tag-option').forEach(el=>{
+  el.addEventListener('click',()=>{
+    if(el.classList.contains('selected')){
+      el.classList.remove('selected');
+      selectedTags=selectedTags.filter(t=>t!==el.dataset.tag);
+    }else{
+      if(selectedTags.length>=4){showToast('עד 4 תגיות');return}
+      el.classList.add('selected');
+      selectedTags.push(el.dataset.tag);
+    }
+  });
+});
+
+function selectEmoji(emoji){
+  selectedEmoji=emoji;
+  document.querySelectorAll('.emoji-option').forEach(e=>e.classList.toggle('selected',e.dataset.emoji===emoji));
+}
+function selectTag(tag){
+  const el=document.querySelector(`.tag-option[data-tag="${tag}"]`);
+  if(el&&!el.classList.contains('selected')&&selectedTags.length<4){
+    el.classList.add('selected');selectedTags.push(tag);
+  }
+}
+function setSelectValue(id,value){
+  const el=document.getElementById(id);if(!el)return;
+  for(let o of el.options){if(o.value===value||o.text===value){el.value=o.value;return}}
+}
+
+// ===== SCAN =====
+window.scanUrl=async function(){
+  const url=document.getElementById('f-url')?.value.trim();
+  if(!url){showToast('נא להדביק קישור');return}
+  if(!url.startsWith('http')){showToast('קישור לא תקין');return}
+  const btn=document.getElementById('scanBtn');
+  const status=document.getElementById('scanStatus');
+  btn.disabled=true;btn.textContent='סורק...';
+  status.className='scan-status scanning';
+  status.innerHTML='🤖 סורק את הכלי... זה עשוי לקחת כ-15 שניות';
+  try{
+    const response=await fetch(WORKER_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({url})
+    });
+    const parsed=await response.json();
+    if(parsed.error)throw new Error(parsed.error);
+    if(parsed.name)document.getElementById('f-name').value=parsed.name;
+    if(parsed.type)setSelectValue('f-type',parsed.type);
+    if(parsed.purpose)document.getElementById('f-purpose').value=parsed.purpose;
+    if(parsed.usage)document.getElementById('f-usage').value=parsed.usage;
+    if(parsed.age)setSelectValue('f-age',parsed.age);
+    if(parsed.subject)setSelectValue('f-subject',parsed.subject);
+    if(parsed.emoji)selectEmoji(parsed.emoji);
+    if(parsed.tags&&Array.isArray(parsed.tags))parsed.tags.forEach(t=>selectTag(t));
+    if(parsed.image){imageUrl=parsed.image;showImagePreview(parsed.image)}
+    updatePreview();
+    status.className='scan-status success';
+    status.innerHTML='✅ הסריקה הושלמה! הפרטים מולאו אוטומטית. ניתן לערוך לפני השליחה.';
+    showToast('✅ הפרטים מולאו!');
+  }catch(e){
+    console.error('Scan error:',e);
+    status.className='scan-status error';
+    status.innerHTML='⚠️ לא הצלחנו לקרוא את הכלי אוטומטית. אפשר למלא ידנית.';
+  }
+  btn.disabled=false;btn.textContent='🔍 סרוק';
+}
+
+// ===== PREVIEW =====
+window.updatePreview=function(){
+  const name=document.getElementById('f-name')?.value.trim();
+  const author=document.getElementById('f-author')?.value.trim();
+  const purpose=document.getElementById('f-purpose')?.value.trim();
+  const usage=document.getElementById('f-usage')?.value.trim();
+  const card=document.getElementById('previewCard');
+  if(name||purpose){
+    card.style.display='block';
+    document.getElementById('previewName').textContent=name||'שם הכלי';
+    document.getElementById('previewAuthor').textContent=author||'שם היוצר';
+    let desc='';
+    if(purpose)desc+='🎯 '+purpose;
+    if(usage)desc+=(desc?'\n':'')+'📋 '+usage;
+    const descEl=document.getElementById('previewDesc');
+    descEl.textContent=desc||'תיאור הכלי יופיע כאן...';
+    descEl.style.whiteSpace='pre-line';
+    document.getElementById('previewIcon').textContent=selectedEmoji||'🤖';
+  }else{card.style.display='none'}
+}
+
+// ===== SUBMIT =====
+window.submitForm=async function(){
+  const name=document.getElementById('f-name')?.value.trim();
+  const url=document.getElementById('f-url')?.value.trim();
+  const purpose=document.getElementById('f-purpose')?.value.trim();
+  const usage=document.getElementById('f-usage')?.value.trim();
+  const author=document.getElementById('f-author')?.value.trim();
+  const email=document.getElementById('f-email')?.value.trim();
+  const age=document.getElementById('f-age')?.value;
+  const subject=document.getElementById('f-subject')?.value;
+  const type=document.getElementById('f-type')?.value;
+  const community=document.getElementById('f-community')?.value;
+  if(!name){showToast('נא להזין שם לכלי');return}
+  if(!type){showToast('נא לבחור סוג כלי');return}
+  if(!url){showToast('נא להזין קישור');return}
+  if(!purpose){showToast('נא לתאר את מטרת הכלי');return}
+  if(!usage){showToast('נא לתאר איך משתמשים בכלי');return}
+  if(!author){showToast('נא להזין את שמך');return}
+  if(!email){showToast('נא להזין מייל');return}
+  if(!age){showToast('נא לבחור גיל יעד');return}
+  if(!subject){showToast('נא לבחור תחום דעת');return}
+  if(!community){showToast('נא לבחור קהילה');return}
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='שולח...';
+  try{
+    await addDoc(collection(db,'apps'),{
+      name,author,purpose,usage,url,
+      icon:selectedEmoji||'🤖',
+      color:'#E6EEFF',
+      tags:selectedTags,
+      image:imageUrl||'',
+      age,subject,type,community,
+      takes:0,comments:[],status:'pending',
+      email,
+      role:document.getElementById('f-role')?.value.trim()||'',
+      submittedAt:new Date().toISOString()
+    });
+    // ============================================================
+    // ⚙️  REPLACE WITH YOUR EMAILJS CONFIG
+    // ============================================================
+    try{
+      emailjs.init('1BXDYsn3l8dYS5u7Q');
+      await emailjs.send('service_ugnx7wk','template_k42r09a',{
+        tool_name:name,
+        author_name:author,
+        author_email:email,
+        tool_url:url,
+        tool_purpose:purpose,
+        tool_usage:usage,
+        tool_community:community
+      });
+    }catch(emailErr){console.error('Email error:',emailErr)}
+    // ============================================================
+    document.getElementById('formCard').style.display='none';
+    document.getElementById('successState').classList.add('show');
+    showToast('🎉 הכלי נשלח בהצלחה!');
+  }catch(e){
+    console.error(e);showToast('שגיאה בשליחה, נסה שוב');
+    btn.disabled=false;btn.textContent='📬 שליחת הכלי לבדיקה';
+  }
+}
+
+// ===== RESET =====
+window.resetForm=function(){
+  document.getElementById('formCard').style.display='block';
+  document.getElementById('successState').classList.remove('show');
+  ['f-name','f-url','f-purpose','f-usage','f-author','f-email','f-role'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  ['f-age','f-subject','f-type','f-community'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  selectedEmoji='';selectedTags=[];imageUrl='';
+  document.querySelectorAll('.emoji-option').forEach(e=>e.classList.remove('selected'));
+  document.querySelectorAll('.tag-option').forEach(e=>e.classList.remove('selected'));
+  document.getElementById('previewCard').style.display='none';
+  document.getElementById('imagePreview').style.display='none';
+  document.getElementById('imagePlaceholder').style.display='block';
+  document.getElementById('f-image-upload').value='';
+  document.getElementById('scanStatus').className='scan-status';
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=false;btn.textContent='📬 שליחת הכלי לבדיקה';
+}
+
+function showToast(m){
+  const e=document.getElementById('toast');
+  e.textContent=m;e.classList.add('show');
+  setTimeout(()=>e.classList.remove('show'),2500);
+}
+</script>
+</body>
+</html>

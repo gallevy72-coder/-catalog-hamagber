@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קטלוג המגבר — כלים חינוכיים דיגיטליים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0038FF;
+  --blue-light:#E6EEFF;
+  --blue-mid:#B3C6FF;
+  --blue-dark:#002299;
+  --yellow:#FFD600;
+  --purple:#5533CC;
+  --purple-light:#C5B3FF;
+  --purple-bg:#F3F0FF;
+  --bg:#F7F8FC;
+  --bg-card:#fff;
+  --text-primary:#1A1A2E;
+  --text-secondary:#525F7F;
+  --text-light:#8898AA;
+  --border:#EBEBEB;
+  --radius:14px;
+  --radius-sm:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh}
+
+/* ===== HEADER ===== */
+.header{background:#fff;border-bottom:3px solid var(--blue);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,56,255,0.08)}
+.header-inner{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.logo-text{font-family:'Rubik',sans-serif;font-weight:700;font-size:17px;color:var(--text-primary)}
+.logo-text span{color:var(--blue)}
+.logo-sub{font-size:11px;color:var(--text-light);margin-top:1px}
+.header-actions{margin-right:auto;display:flex;align-items:center;gap:8px}
+.btn-submit-link{padding:7px 16px;border-radius:100px;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;background:var(--yellow);color:var(--text-primary);text-decoration:none;border:none;cursor:pointer;transition:all .2s}
+.btn-submit-link:hover{filter:brightness(0.95)}
+.btn-login{padding:7px 16px;border-radius:100px;font-family:'Heebo',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--blue-mid);background:#fff;color:var(--blue);transition:all .2s}
+.btn-login:hover{background:var(--blue-light)}
+.btn-admin{padding:6px 12px;border-radius:100px;font-family:'Heebo',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-light);transition:all .2s}
+.btn-admin:hover{background:var(--bg);color:var(--text-secondary)}
+.user-badge{display:flex;align-items:center;gap:8px;padding:5px 14px 5px 8px;background:var(--blue-light);border-radius:100px;color:var(--blue-dark);font-size:13px;border:1px solid var(--blue-mid)}
+.user-badge .avatar{width:26px;height:26px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.btn-logout{background:none;border:none;color:var(--blue);cursor:pointer;font-size:12px;font-family:'Heebo',sans-serif;opacity:0.6}
+.btn-logout:hover{opacity:1}
+
+/* ===== FEATURED STRIP ===== */
+.featured-strip{background:var(--blue-light);border-bottom:0.5px solid var(--blue-mid);padding:14px 24px;display:flex;align-items:center;gap:16px;max-width:100%}
+.feat-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+.feat-badge{font-size:10px;font-weight:700;background:var(--yellow);color:var(--text-primary);border-radius:3px;padding:2px 8px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0}
+.feat-name{font-size:14px;font-weight:600;color:var(--blue-dark)}
+.feat-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.feat-btn{margin-right:auto;font-size:11px;color:var(--blue);font-weight:600;white-space:nowrap;border:0.5px solid var(--blue);border-radius:100px;padding:4px 12px;background:#fff;cursor:pointer;text-decoration:none;flex-shrink:0}
+.feat-btn:hover{background:var(--blue-light)}
+
+/* ===== FILTERS ===== */
+.filters-bar{background:#F5F7FF;border-bottom:0.5px solid #DDEEFF;padding:8px 24px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.filters-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.f-label{font-size:10px;color:var(--text-light);margin-left:2px;white-space:nowrap;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.f-sep{width:0.5px;height:16px;background:var(--blue-mid);margin:0 6px;flex-shrink:0}
+.f-chip{font-size:11px;padding:4px 11px;border-radius:100px;border:0.5px solid var(--blue-mid);color:var(--blue);background:#fff;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'Heebo',sans-serif}
+.f-chip:hover{background:var(--blue-light)}
+.f-chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.f-chip.community{border-color:var(--purple-light);color:var(--purple);background:var(--purple-bg)}
+.f-chip.community:hover{filter:brightness(0.97)}
+.f-chip.community.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+/* ===== HERO ===== */
+.hero{max-width:1200px;margin:0 auto;padding:32px 24px 16px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hero-text h1{font-family:'Rubik',sans-serif;font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:6px}
+.hero-text h1 span{color:var(--blue)}
+.hero-text p{font-size:14px;color:var(--text-secondary);max-width:420px;line-height:1.7}
+.stats-bar{display:flex;gap:24px;flex-shrink:0}
+.stat-item{text-align:center}
+.stat-num{font-family:'Rubik',sans-serif;font-size:26px;font-weight:700;color:var(--blue)}
+.stat-label{font-size:11px;color:var(--text-light);font-weight:500}
+
+/* ===== GRID ===== */
+.grid-section{max-width:1200px;margin:0 auto;padding:8px 24px 80px}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0;border-top:0.5px solid var(--border);border-right:0.5px solid var(--border)}
+
+/* ===== CARD ===== */
+.app-card{background:var(--bg-card);border-bottom:0.5px solid var(--border);border-left:0.5px solid var(--border);padding:18px;cursor:pointer;transition:background .15s;display:flex;flex-direction:column;gap:10px}
+.app-card:hover{background:#F5F7FF}
+.card-top-row{display:flex;align-items:center;gap:10px}
+.card-em{width:36px;height:36px;border-radius:8px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.card-type-badge{font-size:10px;color:var(--blue);background:var(--blue-light);border-radius:3px;padding:2px 6px;font-weight:600}
+.card-title{font-family:'Rubik',sans-serif;font-size:14px;font-weight:600;color:var(--text-primary)}
+.card-author{font-size:11px;color:var(--text-light)}
+.card-purpose{font-size:13px;color:var(--text-secondary);line-height:1.65}
+.card-usage-toggle{margin-top:2px}
+.btn-usage-toggle{background:none;border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:4px 12px;font-family:'Heebo',sans-serif;font-size:12px;font-weight:500;color:var(--blue);cursor:pointer;transition:all .2s;width:100%;text-align:right}
+.btn-usage-toggle:hover{background:var(--blue-light);border-color:var(--blue-mid)}
+.btn-usage-toggle.open{background:var(--blue-light);border-color:var(--blue-mid)}
+.card-usage-content{padding:8px 12px;margin-top:4px;font-size:12.5px;color:var(--text-secondary);line-height:1.65;background:var(--bg);border-radius:var(--radius-sm);border-right:2px solid var(--blue)}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{padding:2px 8px;border-radius:3px;font-size:10px;font-weight:500}
+.tag.type{background:var(--blue-light);color:var(--blue)}
+.tag.age{background:#FFF8E1;color:#E65100}
+.tag.subject{background:#F0FDF4;color:#166534}
+.tag.community{background:var(--purple-bg);color:var(--purple)}
+.tag.default{background:#F5F5F5;color:#555}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:0.5px solid var(--border)}
+.card-meta{font-size:11px;color:var(--text-light);display:flex;gap:12px}
+.card-actions{display:flex;gap:6px}
+.btn-take{padding:6px 14px;border-radius:100px;border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-take:hover{background:var(--blue-dark)}
+.btn-comment{padding:6px 10px;border-radius:100px;border:0.5px solid var(--border);background:#fff;color:var(--text-secondary);font-family:'Heebo',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
+.btn-comment:hover{border-color:var(--blue-mid);color:var(--blue)}
+.card-image{width:100%;height:160px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:2px}
+
+/* ===== FOOTER BAR ===== */
+.site-footer{position:fixed;bottom:0;left:0;right:0;padding:8px 24px;background:#fff;border-top:0.5px solid var(--border);display:flex;justify-content:flex-start;z-index:50}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:var(--radius);width:100%;max-width:500px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,56,255,0.12);animation:slideUp .3s cubic-bezier(.4,0,.2,1);border:0.5px solid var(--blue-mid)}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid var(--border);padding-bottom:14px}
+.modal-header h2{font-family:'Rubik',sans-serif;font-size:18px;font-weight:600}
+.modal-close{width:30px;height:30px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;font-size:16px;color:var(--text-light);display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:18px 20px 20px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:5px}
+.form-group input,.form-group textarea{width:100%;padding:10px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);font-family:'Heebo',sans-serif;font-size:14px;color:var(--text-primary);background:var(--bg);transition:all .2s;direction:rtl}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(0,56,255,0.08)}
+.form-group textarea{min-height:80px;resize:vertical}
+.btn-submit-modal{width:100%;padding:11px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-submit-modal:hover{background:var(--blue-dark)}
+
+/* ===== COMMENTS ===== */
+.comments-list{margin-top:14px}
+.comment-item{padding:12px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:8px;border-right:2px solid var(--blue)}
+.comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.comment-author{font-weight:600;font-size:13px;color:var(--text-primary)}
+.comment-date{font-size:11px;color:var(--text-light)}
+.comment-text{font-size:13px;color:var(--text-secondary);line-height:1.6}
+
+/* ===== ADMIN ===== */
+.admin-panel{max-width:1200px;margin:0 auto;padding:28px 24px 60px}
+.admin-panel h2{font-family:'Rubik',sans-serif;font-size:22px;margin-bottom:20px;color:var(--text-primary)}
+.admin-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,56,255,0.06);border:0.5px solid var(--border)}
+.admin-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:right;font-size:13px;font-weight:600}
+.admin-table td{padding:12px 16px;border-bottom:0.5px solid var(--border);font-size:13px}
+.admin-table tr:last-child td{border-bottom:none}
+.admin-table tr:hover td{background:var(--blue-light)}
+.count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:30px;padding:3px 10px;border-radius:100px;font-weight:700;font-size:12px}
+.count-badge.takes{background:var(--blue-light);color:var(--blue)}
+.count-badge.comments{background:var(--purple-bg);color:var(--purple)}
+.empty-state{text-align:center;padding:40px;color:var(--text-light);font-size:15px;grid-column:1/-1}
+.pending-section{margin-bottom:28px}
+.pending-section h3{font-family:'Rubik',sans-serif;font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pending-count{background:#FEF3C7;color:#92400E;padding:2px 10px;border-radius:100px;font-size:12px;font-weight:700}
+.pending-card{background:#fff;border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px;border-right:3px solid #F59E0B;display:flex;align-items:flex-start;gap:12px}
+.pending-card:hover{box-shadow:0 2px 12px rgba(0,56,255,0.08)}
+.pending-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:#FEF3C7}
+.pending-info{flex:1;min-width:0}
+.pending-name{font-family:'Rubik',sans-serif;font-size:14px;font-weight:600}
+.pending-meta{font-size:11px;color:var(--text-light);margin:2px 0 5px}
+.pending-desc{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px}
+.pending-link{font-size:11px;color:var(--blue);text-decoration:none;word-break:break-all}
+.pending-link:hover{text-decoration:underline}
+.pending-actions{display:flex;gap:6px;flex-shrink:0;align-self:center}
+.btn-approve{padding:7px 14px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.btn-approve:hover{background:var(--blue-dark)}
+.btn-reject{padding:7px 14px;border-radius:var(--radius-sm);border:1px solid #FCA5A5;background:#fff;color:#DC2626;font-family:'Heebo',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.btn-reject:hover{background:#FEF2F2}
+.btn-delete{background:none;border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:4px 8px;cursor:pointer;font-size:13px;transition:all .2s}
+.btn-delete:hover{background:#FEF2F2;border-color:#FCA5A5}
+.btn-edit{background:none;border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:4px 8px;cursor:pointer;font-size:13px;transition:all .2s}
+.btn-edit:hover{background:var(--blue-light);border-color:var(--blue-mid)}
+.edit-form{padding:18px 20px 20px}
+.edit-form .form-group{margin-bottom:12px}
+.edit-form .form-group label{display:block;font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:4px}
+.edit-form .form-group input,.edit-form .form-group textarea,.edit-form .form-group select{width:100%;padding:9px 11px;border-radius:var(--radius-sm);border:1.5px solid var(--border);font-family:'Heebo',sans-serif;font-size:13px;color:var(--text-primary);background:var(--bg);direction:rtl}
+.edit-form .form-group input:focus,.edit-form .form-group textarea:focus,.edit-form .form-group select:focus{outline:none;border-color:var(--blue);background:#fff}
+.edit-form .form-group textarea{min-height:56px;resize:vertical}
+.edit-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.edit-form .btn-save{padding:9px 20px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-left:8px}
+.edit-form .btn-save:hover{background:var(--blue-dark)}
+
+/* ===== LOADING / TOAST ===== */
+.loading{text-align:center;padding:60px;color:var(--text-light);font-size:15px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-primary);color:#fff;padding:12px 24px;border-radius:100px;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.15);z-index:300;transition:transform .3s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero{flex-direction:column;align-items:flex-start;gap:14px;padding:20px 16px 12px}
+  .hero-text h1{font-size:20px}
+  .stats-bar{gap:16px}
+  .stat-num{font-size:22px}
+  .grid-section{padding:8px 0 80px}
+  .apps-grid{grid-template-columns:1fr;border-right:none}
+  .app-card{border-left:none;border-right:none}
+  .header-inner{padding:10px 14px}
+  .logo-text{font-size:15px}
+  .filters-bar{padding:8px 14px}
+  .featured-strip{padding:10px 14px}
+  .feat-desc{display:none}
+  .admin-panel{padding:16px 14px 40px}
+  .admin-table th,.admin-table td{padding:8px 10px;font-size:11px}
+  .pending-card{flex-direction:column}
+  .pending-actions{align-self:flex-start;margin-top:6px}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div id="app"><div class="loading">⏳ טוען את קטלוג המגבר...</div></div>
+<div id="toast" class="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import{getFirestore,collection,doc,getDocs,updateDoc,deleteDoc,increment}from"https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+// ============================================================
+// ⚙️  REPLACE WITH YOUR FIREBASE CONFIG
+// ============================================================
+const firebaseConfig={
+  apiKey:"AIzaSyAVELCjC68Wp_Mk5g5otDVZTpNGr39KfDE",
+  authDomain:"catalog-hamagber.firebaseapp.com",
+  projectId:"catalog-hamagber",
+  storageBucket:"catalog-hamagber.firebasestorage.app",
+  messagingSenderId:"44129692264",
+  appId:"1:44129692264:web:fe690ddd33f5e8c63629dd"
+};
+// ============================================================
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
+const COMMUNITIES=['בינה מלאכותית','נוירופדגוגיה','שלומות המורים','בית מדרש עברי','פסיכופדגוגיה','מחנה משותף'];
+const ADMIN_PASSWORD='2026'; // שנה לסיסמה שלך
+
+let state={
+  apps:[],
+  user:null,
+  filterType:'הכל',      // סינון לפי סוג/תחום
+  filterCommunity:'הכל', // סינון לפי קהילה
+  view:'catalog',
+  modal:null
+};
+
+try{const u=localStorage.getItem('magber-user');if(u)state.user=JSON.parse(u)}catch(e){}
+
+async function loadApps(){
+  const snap=await getDocs(collection(db,'apps'));
+  state.apps=[];
+  snap.forEach(d=>{state.apps.push({id:d.id,...d.data()})});
+  render();
+}
+
+function getApproved(){return state.apps.filter(a=>a.status==='approved')}
+function getPending(){return state.apps.filter(a=>a.status==='pending')}
+
+function getFiltered(){
+  let list=getApproved();
+  if(state.filterType!=='הכל')list=list.filter(a=>a.subject===state.filterType||a.type===state.filterType);
+  if(state.filterCommunity!=='הכל')list=list.filter(a=>a.community===state.filterCommunity);
+  return list;
+}
+
+function showToast(m){
+  const e=document.getElementById('toast');
+  e.textContent=m;e.classList.add('show');
+  setTimeout(()=>e.classList.remove('show'),2500)
+}
+
+function render(){
+  document.getElementById('app').innerHTML=
+    renderHeader()+
+    (state.view==='admin'?renderAdmin():renderCatalog());
+  if(state.modal)document.getElementById('app').insertAdjacentHTML('beforeend',renderModal());
+  attachEvents();
+}
+
+// ===== HEADER =====
+function renderHeader(){
+  const u=state.user
+    ?`<div class="user-badge"><div class="avatar">${state.user.name.charAt(0)}</div><span>${state.user.name}</span><button class="btn-logout" onclick="window._logout()">יציאה</button></div>`
+    :`<button class="btn-login" onclick="window._openLogin()">כניסה</button>`;
+  return `
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="logo-text">קטלוג <span>המגבר</span></div>
+          <div class="logo-sub">כלים דיגיטליים מהשטח, למורים</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="submit.html" class="btn-submit-link">+ הגישו כלי</a>
+        ${u}
+        <button class="btn-admin" onclick="window._toggleView()">${state.view==='admin'?'📋 קטלוג':'📊 דשבורד'}</button>
+      </div>
+    </div>
+  </header>
+  <div class="site-footer"></div>`;
+}
+
+// ===== CATALOG =====
+function renderCatalog(){
+  const approved=getApproved();
+  const filtered=getFiltered();
+  const tT=approved.reduce((s,a)=>s+(a.takes||0),0);
+  const tC=approved.reduce((s,a)=>s+(a.comments?a.comments.length:0),0);
+
+  // Build type/subject filter chips from actual data
+  const types=['הכל',...new Set(approved.map(a=>a.subject).filter(Boolean))];
+
+  const typeChips=types.map(t=>
+    `<button class="f-chip${state.filterType===t?' active':''}" data-filter-type="${t}">${t}</button>`
+  ).join('');
+
+  const communityChips=COMMUNITIES.map(c=>
+    `<button class="f-chip community${state.filterCommunity===c?' active':''}" data-filter-community="${c}">${c}</button>`
+  ).join('');
+
+  // Featured: pick tool with most takes
+  const featured=approved.sort((a,b)=>(b.takes||0)-(a.takes||0))[0];
+  const featuredHTML=featured?`
+  <div class="featured-strip">
+    <div class="feat-inner">
+      <span class="feat-badge">מומלץ השבוע</span>
+      <div>
+        <div class="feat-name">${featured.name}${featured.author?' — '+featured.author:''}</div>
+        <div class="feat-desc">${featured.purpose||featured.desc||''}</div>
+      </div>
+      <a href="${featured.url||'#'}" target="_blank" class="feat-btn">לכלי ←</a>
+    </div>
+  </div>`:'' ;
+
+  return `
+  ${featuredHTML}
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <span class="f-label">תחום:</span>
+      <button class="f-chip${state.filterType==='הכל'?' active':''}" data-filter-type="הכל">הכל</button>
+      ${typeChips}
+      <div class="f-sep"></div>
+      <span class="f-label">קהילה:</span>
+      <button class="f-chip${state.filterCommunity==='הכל'?' active':''}" data-filter-community="הכל">כל הקהילות</button>
+      ${communityChips}
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-text">
+      <h1>קטלוג <span>המגבר</span></h1>
+      <p>כלים חינוכיים דיגיטליים שנוצרו בידי מורים, עברו בדיקה, ומוכנים לשימוש בכיתה</p>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-num">${approved.length}</div><div class="stat-label">כלים</div></div>
+      <div class="stat-item"><div class="stat-num">${tT}</div><div class="stat-label">לקיחות</div></div>
+      <div class="stat-item"><div class="stat-num">${tC}</div><div class="stat-label">הערות</div></div>
+    </div>
+  </div>
+  <div class="grid-section">
+    <div class="apps-grid">
+      ${filtered.map(a=>renderCard(a)).join('')}
+      ${filtered.length===0?'<div class="empty-state">לא נמצאו כלים התואמים את הסינון</div>':''}
+    </div>
+  </div>`;
+}
+
+// ===== CARD =====
+function renderCard(a){
+  const comments=a.comments||[];
+  const tags=a.tags||[];
+
+  const imageHTML=(a.image&&a.image.length>10)
+    ?`<img class="card-image" src="${a.image}" alt="${a.name}" onerror="this.style.display='none'">`
+    :'';
+
+  const purposeHTML=a.purpose
+    ?`<div class="card-purpose">${a.purpose}</div>`
+    :(a.desc?`<div class="card-purpose">${a.desc}</div>`:'');
+
+  const usageHTML=a.usage
+    ?`<div class="card-usage-toggle">
+        <button class="btn-usage-toggle" data-usage="${a.id}">📋 הנחיות שימוש ▾</button>
+        <div class="card-usage-content" id="usage-${a.id}" style="display:none">${a.usage}</div>
+      </div>`
+    :'';
+
+  const communityTag=a.community
+    ?`<span class="tag community">${a.community}</span>`
+    :'';
+
+  return `
+  <div class="app-card">
+    ${imageHTML}
+    <div class="card-top-row">
+      <div class="card-em">${a.icon||'🤖'}</div>
+      <div>
+        <div class="card-title">${a.name}</div>
+        <div class="card-author">${a.author||''}</div>
+      </div>
+      <div style="margin-right:auto">${a.type||a.subject?`<span class="card-type-badge">${(a.name.match(/\(([^)]+)\)/)||['',''])[1]||a.subject||''}</span>`:''}</div>
+    </div>
+    ${purposeHTML}
+    ${usageHTML}
+    <div class="card-tags">
+      ${a.age?`<span class="tag age">${a.age}</span>`:''}
+      ${a.subject?`<span class="tag subject">${a.subject}</span>`:''}
+      ${communityTag}
+      ${tags.map(t=>`<span class="tag default">${t}</span>`).join('')}
+    </div>
+    <div class="card-footer">
+      <div class="card-meta">
+        <span>🔗 ${a.takes||0}</span>
+        <span>💬 ${comments.length}</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn-comment" data-id="${a.id}">💬 ${comments.length}</button>
+        <button class="btn-take" data-id="${a.id}" data-url="${a.url||''}">קחו אותי ←</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ===== ADMIN =====
+function renderAdmin(){
+  const pending=getPending();
+  const approved=getApproved().sort((a,b)=>(b.takes||0)-(a.takes||0));
+
+  const pendingHTML=pending.length>0?`
+  <div class="pending-section">
+    <h3>⏳ ממתינים לאישור <span class="pending-count">${pending.length}</span></h3>
+    ${pending.map(a=>`
+    <div class="pending-card">
+      <div class="pending-icon">${a.icon||'🤖'}</div>
+      <div class="pending-info">
+        <div class="pending-name">${a.name}</div>
+        <div class="pending-meta">מאת ${a.author||''} · ${a.age||''} · ${a.subject||''}${a.community?' · '+a.community:''}${a.email?' · '+a.email:''}</div>
+        <div class="pending-desc">${a.purpose||a.desc||''}</div>
+        <a class="pending-link" href="${a.url||'#'}" target="_blank">${a.url||''}</a>
+      </div>
+      <div class="pending-actions">
+        <button class="btn-approve" data-approve="${a.id}">✅ אישור</button>
+        <button class="btn-reject" data-reject="${a.id}">❌ דחייה</button>
+      </div>
+    </div>`).join('')}
+  </div>`:'';
+
+  return `
+  <div class="admin-panel">
+    <h2>📊 דשבורד מנהל — קטלוג המגבר</h2>
+    ${pendingHTML}
+    <h3 style="font-family:Rubik,sans-serif;font-size:16px;margin-bottom:14px">📋 כלים מאושרים (${approved.length})</h3>
+    <table class="admin-table">
+      <thead><tr><th>#</th><th>שם הכלי</th><th>קהילה</th><th>תחום</th><th>גיל</th><th>לקיחות</th><th>הערות</th><th>פעולות</th></tr></thead>
+      <tbody>
+        ${approved.map((a,i)=>`
+        <tr>
+          <td>${i+1}</td>
+          <td><strong>${a.icon||''} ${a.name}</strong><br><span style="color:var(--text-light);font-size:11px">${a.author||''}</span></td>
+          <td>${a.community?`<span class="tag community" style="font-size:10px">${a.community}</span>`:''}</td>
+          <td>${a.subject||''}</td>
+          <td>${a.age||''}</td>
+          <td><span class="count-badge takes">${a.takes||0}</span></td>
+          <td><span class="count-badge comments">${a.comments?a.comments.length:0}</span></td>
+          <td><button class="btn-edit" data-edit="${a.id}">✏️</button> <button class="btn-delete" data-delete="${a.id}">🗑️</button></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ===== MODAL =====
+function renderModal(){
+  if(state.modal.type==='login'){
+    return `<div class="modal-overlay" onclick="window._closeOverlay(event)">
+      <div class="modal">
+        <div class="modal-header"><h2>👋 כניסה לקטלוג</h2><button class="modal-close" onclick="window._closeModal()">✕</button></div>
+        <div class="modal-body">
+          <div class="form-group"><label>שם מלא</label><input type="text" id="reg-name" placeholder="השם שלך"></div>
+          <div class="form-group"><label>כתובת מייל</label><input type="email" id="reg-email" placeholder="your@email.com" dir="ltr" style="text-align:left"></div>
+          <button class="btn-submit-modal" onclick="window._doLogin()">כניסה</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if(state.modal.type==='comment'){
+    const a=state.apps.find(x=>x.id===state.modal.appId);
+    if(!a)return'';
+    const comments=a.comments||[];
+    const commentsHTML=comments.length>0
+      ?`<div class="comments-list">${comments.map(c=>`
+          <div class="comment-item">
+            <div class="comment-header"><span class="comment-author">${c.author}</span><span class="comment-date">${c.date}</span></div>
+            <div class="comment-text">${c.text}</div>
+          </div>`).join('')}</div>`
+      :`<div style="text-align:center;padding:20px;color:var(--text-light);font-size:13px">אין עדיין הערות</div>`;
+    const formHTML=state.user
+      ?`<div style="margin-top:14px;padding-top:14px;border-top:0.5px solid var(--border)">
+          <div class="form-group"><label>הערה חדשה</label><textarea id="comment-text" placeholder="שתפ/י את החוויה שלך..."></textarea></div>
+          <button class="btn-submit-modal" data-addcomment="${a.id}">שלח הערה</button>
+        </div>`
+      :`<div style="margin-top:14px;padding:16px;background:var(--blue-light);border-radius:var(--radius-sm);text-align:center;font-size:13px;color:var(--blue-dark)">
+          צריך להתחבר כדי להשאיר הערה<br>
+          <button class="btn-submit-modal" style="max-width:180px;margin:10px auto 0" onclick="window._closeModal();window._openLogin();">כניסה</button>
+        </div>`;
+    return `<div class="modal-overlay" onclick="window._closeOverlay(event)">
+      <div class="modal">
+        <div class="modal-header"><h2>${a.icon||''} ${a.name} — הערות</h2><button class="modal-close" onclick="window._closeModal()">✕</button></div>
+        <div class="modal-body">${commentsHTML}${formHTML}</div>
+      </div>
+    </div>`;
+  }
+
+  if(state.modal.type==='edit'){
+    const a=state.apps.find(x=>x.id===state.modal.appId);
+    if(!a)return'';
+    const ageOptions=['גן','יסודי','יסודי-חט״ב','חט״ב','חט״ב-תיכון','תיכון','כל הגילאים'];
+    const subjectOptions=['מתמטיקה','עברית','אנגלית','תנ״ך','מדעים','היסטוריה','מדעי המחשב','חינוך חברתי','אומנות','בין-תחומי','אחר'];
+    const communityOptions=['',  ...COMMUNITIES];
+    return `<div class="modal-overlay" onclick="window._closeOverlay(event)">
+      <div class="modal">
+        <div class="modal-header"><h2>✏️ עריכת כלי</h2><button class="modal-close" onclick="window._closeModal()">✕</button></div>
+        <div class="edit-form">
+          <div class="form-group"><label>שם הכלי</label><input type="text" id="edit-name" value="${(a.name||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-group"><label>מטרה</label><textarea id="edit-purpose">${a.purpose||a.desc||''}</textarea></div>
+          <div class="form-group"><label>הנחיות שימוש</label><textarea id="edit-usage">${a.usage||''}</textarea></div>
+          <div class="form-group"><label>קישור</label><input type="url" id="edit-url" value="${(a.url||'').replace(/"/g,'&quot;')}" dir="ltr" style="text-align:left"></div>
+          <div class="form-row">
+            <div class="form-group"><label>גיל יעד</label><select id="edit-age">${ageOptions.map(o=>`<option value="${o}"${o===(a.age||'')?'selected':''}>${o}</option>`).join('')}</select></div>
+            <div class="form-group"><label>תחום דעת</label><select id="edit-subject">${subjectOptions.map(o=>`<option value="${o}"${o===(a.subject||'')?'selected':''}>${o}</option>`).join('')}</select></div>
+          </div>
+          <div class="form-group"><label>קהילה</label><select id="edit-community">${communityOptions.map(o=>`<option value="${o}"${o===(a.community||'')?'selected':''}>${o||'— ללא קהילה —'}</option>`).join('')}</select></div>
+          <div class="form-row">
+            <div class="form-group"><label>אייקון</label><input type="text" id="edit-icon" value="${a.icon||''}" style="font-size:20px;width:60px;text-align:center"></div>
+            <div class="form-group"><label>תמונה (URL)</label><input type="url" id="edit-image" value="${(a.image||'').replace(/"/g,'&quot;')}" dir="ltr" style="text-align:left"></div>
+          </div>
+          <button class="btn-save" data-saveedit="${a.id}">💾 שמירה</button>
+        </div>
+      </div>
+    </div>`;
+  }
+  return'';
+}
+
+// ===== GLOBAL ACTIONS =====
+window._openLogin=()=>{state.modal={type:'login'};render();setTimeout(()=>{document.getElementById('reg-name')?.focus()},100)};
+window._doLogin=()=>{
+  const n=document.getElementById('reg-name')?.value.trim();
+  const e=document.getElementById('reg-email')?.value.trim();
+  if(!n||!e){showToast('נא למלא שם ומייל');return}
+  state.user={name:n,email:e};
+  localStorage.setItem('magber-user',JSON.stringify(state.user));
+  state.modal=null;render();showToast('שלום '+n+'! 👋')
+};
+window._logout=()=>{state.user=null;localStorage.removeItem('magber-user');render();showToast('להתראות! 👋')};
+window._closeModal=()=>{state.modal=null;render()};
+window._closeOverlay=e=>{if(e.target.classList.contains('modal-overlay'))window._closeModal()};
+window._toggleView=()=>{
+  if(state.view==='catalog'){
+    const pw=prompt('הזן סיסמת מנהל:');
+    if(pw!==ADMIN_PASSWORD){showToast('סיסמה שגויה');return}
+  }
+  state.view=state.view==='admin'?'catalog':'admin';render();
+};
+
+// ===== EVENTS =====
+function attachEvents(){
+  // Type/subject filter
+  document.querySelectorAll('[data-filter-type]').forEach(b=>b.addEventListener('click',()=>{
+    state.filterType=b.dataset.filterType;render();
+  }));
+  // Community filter
+  document.querySelectorAll('[data-filter-community]').forEach(b=>b.addEventListener('click',()=>{
+    state.filterCommunity=b.dataset.filterCommunity;render();
+  }));
+  // Usage toggle
+  document.querySelectorAll('.btn-usage-toggle').forEach(b=>b.addEventListener('click',()=>{
+    const id=b.dataset.usage;
+    const content=document.getElementById('usage-'+id);
+    if(content.style.display==='none'){content.style.display='block';b.classList.add('open');b.textContent='📋 הנחיות שימוש ▴'}
+    else{content.style.display='none';b.classList.remove('open');b.textContent='📋 הנחיות שימוש ▾'}
+  }));
+  // Take
+  document.querySelectorAll('.btn-take').forEach(b=>b.addEventListener('click',async()=>{
+    const id=b.dataset.id;
+    const a=state.apps.find(x=>x.id===id);if(!a)return;
+    await updateDoc(doc(db,'apps',id),{takes:increment(1)});
+    a.takes=(a.takes||0)+1;render();
+    if(a.url&&a.url!=='#'){window.open(a.url,'_blank');showToast('🚀 נפתח: '+a.name)}
+    else showToast('✅ נספר!')
+  }));
+  // Comment modal
+  document.querySelectorAll('.btn-comment').forEach(b=>b.addEventListener('click',()=>{
+    state.modal={type:'comment',appId:b.dataset.id};render();
+  }));
+  // Add comment
+  document.querySelectorAll('[data-addcomment]').forEach(b=>b.addEventListener('click',async()=>{
+    const id=b.dataset.addcomment;
+    const t=document.getElementById('comment-text')?.value.trim();
+    if(!t){showToast('נא לכתוב הערה');return}
+    const a=state.apps.find(x=>x.id===id);if(!a)return;
+    const now=new Date();
+    const d=now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear();
+    const comments=[...(a.comments||[]),{author:state.user.name,text:t,date:d}];
+    await updateDoc(doc(db,'apps',id),{comments});
+    a.comments=comments;state.modal={type:'comment',appId:id};render();showToast('ההערה נוספה! 💬')
+  }));
+  // Approve
+  document.querySelectorAll('[data-approve]').forEach(b=>b.addEventListener('click',async()=>{
+    const id=b.dataset.approve;
+    await updateDoc(doc(db,'apps',id),{status:'approved'});
+    const a=state.apps.find(x=>x.id===id);if(a)a.status='approved';
+    // ============================================================
+    // ⚙️  REPLACE WITH YOUR EMAILJS CONFIG
+    // ============================================================
+    if(a&&a.email){
+      try{
+        emailjs.init('1BXDYsn3l8dYS5u7Q');
+        await emailjs.send('service_ugnx7wk','template_2yce8gc',{
+          tool_name:a.name,author_name:a.author,author_email:a.email
+        });
+      }catch(err){console.error('Email error:',err)}
+    }
+    // ============================================================
+    render();showToast('✅ אושר!')
+  }));
+  // Reject
+  document.querySelectorAll('[data-reject]').forEach(b=>b.addEventListener('click',async()=>{
+    if(!confirm('למחוק את ההגשה הזו?'))return;
+    const id=b.dataset.reject;
+    const{deleteDoc:del}=await import("https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js");
+    await deleteDoc(doc(db,'apps',id));
+    state.apps=state.apps.filter(x=>x.id!==id);
+    render();showToast('❌ נדחה')
+  }));
+  // Delete
+  document.querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',async()=>{
+    if(!confirm('האם למחוק את הכלי הזה מהקטלוג?'))return;
+    const id=b.dataset.delete;
+    await deleteDoc(doc(db,'apps',id));
+    state.apps=state.apps.filter(x=>x.id!==id);
+    render();showToast('🗑️ הכלי נמחק')
+  }));
+  // Edit
+  document.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>{
+    state.modal={type:'edit',appId:b.dataset.edit};render();
+  }));
+  // Save edit
+  document.querySelectorAll('[data-saveedit]').forEach(b=>b.addEventListener('click',async()=>{
+    const id=b.dataset.saveedit;
+    const updates={
+      name:document.getElementById('edit-name')?.value.trim()||'',
+      purpose:document.getElementById('edit-purpose')?.value.trim()||'',
+      usage:document.getElementById('edit-usage')?.value.trim()||'',
+      url:document.getElementById('edit-url')?.value.trim()||'',
+      age:document.getElementById('edit-age')?.value||'',
+      subject:document.getElementById('edit-subject')?.value||'',
+      community:document.getElementById('edit-community')?.value||'',
+      icon:document.getElementById('edit-icon')?.value.trim()||'🤖',
+      image:document.getElementById('edit-image')?.value.trim()||''
+    };
+    await updateDoc(doc(db,'apps',id),updates);
+    const a=state.apps.find(x=>x.id===id);
+    if(a)Object.assign(a,updates);
+    state.modal=null;render();showToast('✏️ הכלי עודכן!')
+  }));
+}
+
+// Init
+loadApps();
+</script>
+</body>
+</html>
