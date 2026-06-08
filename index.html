@@ -529,7 +529,10 @@ function renderModal(){
       <div class="modal">
         <div class="modal-header"><h2>✏️ עריכת כלי</h2><button class="modal-close" onclick="window._closeModal()">✕</button></div>
         <div class="edit-form">
-          <div class="form-group"><label>שם הכלי</label><input type="text" id="edit-name" value="${(a.name||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-row">
+            <div class="form-group"><label>שם הכלי</label><input type="text" id="edit-name" value="${(a.name||'').replace(/"/g,'&quot;')}"></div>
+            <div class="form-group"><label>שם המגיש</label><input type="text" id="edit-author" value="${(a.author||'').replace(/"/g,'&quot;')}"></div>
+          </div>
           <div class="form-group"><label>מטרה</label><textarea id="edit-purpose">${a.purpose||a.desc||''}</textarea></div>
           <div class="form-group"><label>הנחיות שימוש</label><textarea id="edit-usage">${a.usage||''}</textarea></div>
           <div class="form-group"><label>קישור</label><input type="url" id="edit-url" value="${(a.url||'').replace(/"/g,'&quot;')}" dir="ltr" style="text-align:left"></div>
@@ -662,6 +665,7 @@ function attachEvents(){
     const id=b.dataset.saveedit;
     const updates={
       name:document.getElementById('edit-name')?.value.trim()||'',
+      author:document.getElementById('edit-author')?.value.trim()||'',
       purpose:document.getElementById('edit-purpose')?.value.trim()||'',
       usage:document.getElementById('edit-usage')?.value.trim()||'',
       url:document.getElementById('edit-url')?.value.trim()||'',
