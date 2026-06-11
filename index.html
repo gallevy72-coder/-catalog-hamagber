@@ -405,14 +405,16 @@ function renderCard(a){
         <div class="card-title">${a.name}</div>
         <div class="card-author">${a.author||''}</div>
       </div>
-      <div style="margin-right:auto">${a.type||a.subject?`<span class="card-type-badge">${(a.name.match(/\(([^)]+)\)/)||['',''])[1]||a.subject||''}</span>`:''}</div>
+      <div style="margin-right:auto;display:flex;gap:5px;align-items:center">
+        ${a.community?`<span class="tag community" style="font-size:10px">${a.community}</span>`:''}
+        ${a.type||a.subject?`<span class="card-type-badge">${(a.name.match(/\(([^)]+)\)/)||['',''])[1]||a.subject||''}</span>`:''}
+      </div>
     </div>
     ${purposeHTML}
     ${usageHTML}
     <div class="card-tags">
       ${a.age?`<span class="tag age">${a.age}</span>`:''}
       ${a.subject?`<span class="tag subject">${a.subject}</span>`:''}
-      ${communityTag}
       ${tags.map(t=>`<span class="tag default">${t}</span>`).join('')}
     </div>
     <div class="card-footer">
